@@ -8,7 +8,9 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Gerenciador de Tarefas</title>
+    <title>Tasky</title>
+    <!--Jquery-->
+    <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,20 +24,54 @@
     <link href="css/custom.css" rel="stylesheet">
     <!--Font Awesome-->
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- DatePicker -->
+    <link href="css/datepicker.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <!--Datepicker-->
+    <script src="js/bootstrap-datepicker.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Scripts de Jquery e Javascript da página -->
+    <script type="text/javascript">
+        var bool = "false";
+        $(document).ready(function () {
+          var current = this;
+          $('.done').click(function(){
+              var tr = $(this).parent();
+              var input = $(this).find('[name="feito!"]'); //pega a div de input
+              bool = input.val();
+              if(bool == "true"){
+                tr.css("background", "white");
+                input.val('false');
+                input.prop( "checked", false );
+              }else{
+                tr.css("background", "MediumSpringGreen  ");
+                input.val('true');
+                input.prop( "checked", true );
+              }
+          });
+          
+          $('#calendar').datepicker({
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        });
+
+        });
+
+
+    </script>
+
   </head>
 
   <body>
-
     <div class="container">
       <div class="header clearfix">
         <nav>
@@ -45,60 +81,224 @@
             <!--<li role="presentation" class="active"><a href="#">+</a></li>-->
           </ul>
         </nav>
-        <h3 class="text-muted">Gerenciador de Tarefas</h3>
+        <img class = "logo" src="./img/tasky_002.png" alt="logo">
+        <!--<h3 class="text-muted">Tasky</h3>-->
       </div>
+
+      <span class="pull-right toolbar">
+        <button class="btn btn-primary" type="button">
+          Nova Lista <span class="badge">+</span>
+        </button>
+      </span>
 
       <div>
           <h4 class="text-muted">Suas Listas</h4><br>
       </div>
-
-      <div class="category">
       <span class="pull-right toolbar">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+      </span><br>
+
+      <div class="category blueCat">
+      <span class="pull-right toolbar">
+          <i class="glyphicon glyphicon-plus tip button-add" style="cursor: pointer;
+                                    padding-right: 10px" data-original-title="Adicionar um novo registro." onclick=""></i>
           <i class="fa toggle-box pull-right tip fa-sort-desc" style="cursor:pointer" title="" data-original-title="Clique aqui para expandir / ocultar Pendências"></i>
       </span>
         <h5>Faculdade</h5>
       </div><br>
       <div class = "lista">
           <!--Coloca todos os elementos aqui dentro-->
-          
-      </div>
-      <div class="category">
+          <table class="table table-bordered">
+            <thead>
+              <tr style = "font-weight: bold;font-size: 10px;">
+                <td style="width: 3%;">Feito!</td>
+                <td>Tarefa</td>
+                <td style="width: 18%;">Data
+                  <span class="pull-right toolbar">
+                    <i class="fa fa-calendar-o" id = "calendar" aria-hidden="true"></i>
+                  </span>
+                </td>
+              </tr>
+            </thead>
+            <tbody class = "panel-body">    
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Estudar para a prova de IHC</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Escrever Artigo</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Ler livro sobre Programação Paralela</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Montar apresentação de IHC</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+            </tbody>
+        </table>
+      <p><a class="btn btn-lg btn-success" href="#" role="button" style="height: 30px; width: 10%; font-size: 10px; font-weight: bold;">Salvar</a></p>
+      </div> <!-- div da lista -->
+      <div class="category greenCat">
       <span class="pull-right toolbar">
+        <i class="glyphicon glyphicon-plus tip button-add" style="cursor: pointer;
+                                    padding-right: 10px" data-original-title="Adicionar um novo registro." onclick=""></i>
           <i class="fa toggle-box pull-right tip fa-sort-desc" style="cursor:pointer" title="" data-original-title="Clique aqui para expandir / ocultar Pendências"></i>
       </span>
         <h5>Trabalho</h5>
       </div><br>
-      <div class="category">
+      <div class = "lista">
+          <!--Coloca todos os elementos aqui dentro-->
+          <table class="table table-bordered">
+            <thead>
+              <tr style = "font-weight: bold;font-size: 10px;">
+                <td style="width: 3%;">Feito!</td>
+                <td>Tarefa</td>
+                <td style="width: 18%;">Data
+                  <span class="pull-right toolbar">
+                    <i class="fa fa-calendar-o" id = "calendar" aria-hidden="true"></i>
+                  </span>
+                </td>
+              </tr>
+            </thead>
+            <tbody class = "panel-body">    
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Ligar para o Cliente "Fulano"</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Inicar Projeto OSI5789</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Começar o curso de .NET Core</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Realizar Update da Máquina</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+            </tbody>
+        </table>
+      <p><a class="btn btn-lg btn-success" href="#" role="button" style="height: 30px; width: 10%; font-size: 10px; font-weight: bold;">Salvar</a></p>
+      </div> <!-- div da lista -->
+      <div class="category orangeCat">
       <span class="pull-right toolbar">
+        <i class="glyphicon glyphicon-plus tip button-add" style="cursor: pointer;
+                                    padding-right: 10px" data-original-title="Adicionar um novo registro." onclick=""></i>
           <i class="fa toggle-box pull-right tip fa-sort-desc" style="cursor:pointer" title="" data-original-title="Clique aqui para expandir / ocultar Pendências"></i>
       </span>
-        <h5>Pessoal</h5>
+        <h5 >Pessoal</h5>
       </div><br>
-
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
-
+      <div class = "lista">
+          <!--Coloca todos os elementos aqui dentro-->
+          <table class="table table-bordered">
+            <thead>
+              <tr style = "font-weight: bold;font-size: 10px;">
+                <td style="width: 3%;">Feito!</td>
+                <td>Tarefa</td>
+                <td style="width: 18%;">Data
+                  <span class="pull-right toolbar">
+                    <i class="fa fa-calendar-o" id = "calendar" aria-hidden="true"></i>
+                  </span>
+                </td>
+              </tr>
+            </thead>
+            <tbody class = "panel-body">    
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Viajar para o Nordeste</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Investir na poupança</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Ler um livro Jane Austen</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+              <tr>
+                  <td class = "done">
+                    <input type="checkbox" name="feito!" value="false">
+                  </td>
+                  <td class = "panel-result-center">Assistir o filme "A Chegada"</td>
+                    <!-- DatePicker -->
+                    <td class="input-group date" data-provide="datepicker">
+                        <input type="text" id ="calendar" class="form-control">
+                    </td>
+              </tr>
+            </tbody>
+        </table>
+      <p><a class="btn btn-lg btn-success" href="#" role="button" style="height: 30px; width: 10%; font-size: 10px; font-weight: bold;">Salvar</a></p>
+      </div> <!-- div da lista -->
       <footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
@@ -107,5 +307,5 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../asse
+  
 </html>

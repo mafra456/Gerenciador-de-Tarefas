@@ -1,6 +1,22 @@
 .category{
     border-radius: 3px;
-    padding: 5px 7px;
-    background-color:#428bca; 
+    padding: 5px 7px; 
     color: white;
+}
+
+.blueCat{
+     background-color:#428bca;
+}
+
+.greenCat{
+     background-color:mediumseagreen;
+}
+
+.orangeCat{
+     background-color: darkorange;
+}
+
+.logo{
+    height: 45px;
+    width: 12%;
 }
